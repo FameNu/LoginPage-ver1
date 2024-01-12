@@ -1,7 +1,7 @@
 const express = require('express')
 const fs = require('fs')
 const filePath = './data/data.json'
-const port = 5000
+const port = 3000
 
 const app = express()
 

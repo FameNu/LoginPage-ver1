@@ -9,7 +9,7 @@ function FindName() {
     const onToSubmit = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:5000/login?name=${inputValue}`
+                `http://localhost:3000/login?name=${inputValue}`
             )
             console.log(response)
             setName(response.data.name)
