@@ -1,15 +1,11 @@
 const express = require('express')
-const fs = require('fs')
-const filePath = './data/data.json'
+const { management } = require('./services/management.js')
+const { Setting } = require('./models/setting.js')
+const manager = management()
+manager.loadData()
+
 const port = 3000
-
 const app = express()
-
-function findUser(name) {
-    const listUser = JSON.parse(fs.readFileSync(filePath, 'utf8'))
-    if (!listUser) return res.status(400).send({ error: 'No user found' })
-    return listUser.find(user => user.name === name)
-}
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -27,10 +23,41 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     const { name } = req.query
-    if (!name) return res.status(400).send({ error: 'Name parameter is missing' })
+    const { password } = req.query
+    // if (!name)
+    //     return res.status(400).send({ error: 'Name parameter is missing' })
+    // if (!password)
+    //     return res.status(400).send({ error: 'Password parameter is missing' })
 
-    const data = findUser(name)
-    res.send(data)
+    const dataUser = manager.findUser(name, password)
+    if (!dataUser)
+        res.send({ errMsg: 'username or password is wrong' })
+    else res.send({ dataUser })
+})
+
+app.post('/register', (req, res) => {
+    const { name } = req.query
+    const { password } = req.query
+    // if (!name)
+    //     return res.status(400).send({ error: 'Name parameter is missing' })
+    // if (!password)
+    //     return res.status(400).send({ error: 'Password parameter is missing' })
+
+    const dataUser = manager.addUser(name, password)
+    if (!dataUser)
+        res.send({ errMsg: 'username \'' + name + '\' is already taken' })
+    else res.send({ dataUser })
+})
+
+app.post('/logout', (req, res) => {
+    res.send({ dataUser: null, setting: new Setting() })
+})
+
+app.get('/save', (req, res) => {
+    const { bgColor, fontColor } = req.query
+    console.log(req.query)
+    const setting = new Setting(bgColor, fontColor)
+    console.log(setting)
 })
 
 app.listen(port, () => {
