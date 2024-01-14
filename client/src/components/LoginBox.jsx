@@ -1,28 +1,37 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+const url = 'http://localhost:3000/'
+
 function LoginBox(params) {
     const [usernameInput, setUsernameInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const [errMsg, setErrMsg] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [showLogoutBox, setShowLogoutBox] = useState(false)
+    const [username, setUsername] = useState('')
 
     const handeShowPassword = () => {
         setShowPassword(!showPassword)
     }
 
-    const callData = (response) => {
+    const callData = (data, showLogout = true) => {
+        if (data.errMsg) {
+            setErrMsg(data.errMsg)
+            return
+        }
         setUsernameInput('')
         setPasswordInput('')
         setErrMsg('')
-        setShowLogoutBox(!showLogoutBox)
-        params.toLoadData(response)
+        setShowLogoutBox(showLogout)
+        setUsername(data.user.name)
+        params.sendData(data.user)
     }
 
     const checkValidInput = () => {
         if (usernameInput && passwordInput) return true
-        if (!usernameInput && !passwordInput) setErrMsg('Please enter username and password')
+        if (!usernameInput && !passwordInput)
+            setErrMsg('Please enter username and password')
         else if (!usernameInput) setErrMsg('Please enter username')
         else if (!passwordInput) setErrMsg('Please enter password')
         return false
@@ -32,9 +41,9 @@ function LoginBox(params) {
         if (!checkValidInput()) return
         try {
             const response = await axios.get(
-                `http://localhost:3000/login?name=${usernameInput}&password=${passwordInput}`
+                `${url}login?name=${usernameInput}&password=${passwordInput}`
             )
-            callData(response)
+            callData(response.data)
         } catch (error) {
             console.error('Error fetching data:', error)
         }
@@ -44,9 +53,9 @@ function LoginBox(params) {
         if (!checkValidInput()) return
         try {
             const response = await axios.post(
-                `http://localhost:3000/register?name=${usernameInput}&password=${passwordInput}`
+                `${url}register?name=${usernameInput}&password=${passwordInput}`
             )
-            callData(response)
+            callData(response.data)
         } catch (error) {
             console.error('Error fetching data:', error)
         }
@@ -54,10 +63,8 @@ function LoginBox(params) {
 
     const signOut = async () => {
         try {
-            const response = await axios.post(
-                `http://localhost:3000/logout`
-            )
-            callData(response)
+            const response = await axios.get(`${url}`)
+            callData(response.data, false)
         } catch (error) {
             console.error('Error fetching data:', error)
         }
@@ -65,17 +72,8 @@ function LoginBox(params) {
 
     return (
         <>
-        {
-            showLogoutBox &&
-            <div id='logout-box'>
-                <h2>Are you sure?</h2>
-                <button onClick={signOut}>Sign-out</button>
-            </div>
-        }
-        {
-            !showLogoutBox &&
-            <div className='container' id='login-container'>
-                {errMsg && <h2>{errMsg}</h2>}
+            <div className='container-login' id='login-container'>
+                {errMsg && <h2 className='text-danger'>{errMsg}</h2>}
                 <div id='username-box'>
                     <label htmlFor='username'>Enter Name</label>
                     <input
@@ -95,6 +93,8 @@ function LoginBox(params) {
                         value={passwordInput}
                         onChange={(e) => setPasswordInput(e.target.value)}
                     />
+                </div>
+                <div id='show-password'>
                     <input
                         type='checkbox'
                         name='show-password'
@@ -102,15 +102,20 @@ function LoginBox(params) {
                         checked={showPassword}
                         onChange={handeShowPassword}
                     />
+                    <label htmlFor='show-password'>show password</label>
                 </div>
                 <div id='button-box'>
                     <button onClick={onToSignIn}>Sign-in</button>
                     <button onClick={onToSignUp}>Sign-up</button>
                 </div>
+                {showLogoutBox && (
+                    <div id='logout-box'>
+                        <h2>Hello, {username}</h2>
+                        <button onClick={signOut}>Sign-out</button>
+                    </div>
+                )}
             </div>
-        }
         </>
-        
     )
 }
 

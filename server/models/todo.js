@@ -5,6 +5,14 @@ class Todo {
         this.description = description
         this.status = status
     }
+
+    getId() {
+        return this.id
+    }
+
+    setStatus(status) {
+        this.status = status
+    }
 }
 
 module.exports = { Todo }

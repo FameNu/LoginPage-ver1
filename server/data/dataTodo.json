@@ -1,198 +1,67 @@
 [
-    {
-        "user": {
-            "name": "fame",
-            "password": "1234"
-        },
-        "todolist": [
-            {
-                "id": 1,
-                "title": "Todo 1",
-                "description": "Todo 1 description",
-                "status": false
-            },
-            {
-                "id": 2,
-                "title": "Todo 2",
-                "description": "Todo 2 description",
-                "status": false
-            },
-            {
-                "id": 3,
-                "title": "Todo 3",
-                "description": "Todo 3 description",
-                "status": false
-            },
-            {
-                "id": 4,
-                "title": "Todo 4",
-                "description": "Todo 4 description",
-                "status": false
-            },
-            {
-                "id": 5,
-                "title": "Todo 5",
-                "description": "Todo 5 description",
-                "status": false
-            },
-            {
-                "id": 6,
-                "title": "Todo 6",
-                "description": "Todo 6 description",
-                "status": false
-            },
-            {
-                "id": 7,
-                "title": "Todo 7",
-                "description": "Todo 7 description",
-                "status": false
-            },
-            {
-                "id": 8,
-                "title": "Todo 8",
-                "description": "Todo 8 description",
-                "status": false
-            },
-            {
-                "id": 9,
-                "title": "Todo 9",
-                "description": "Todo 9 description",
-                "status": false
-            },
-            {
-                "id": 10,
-                "title": "Todo 10",
-                "description": "Todo 10 description",
-                "status": false
-            },
-            {
-                "id": 11,
-                "title": "Todo 11",
-                "description": "Todo 11 description",
-                "status": false
-            },
-            {
-                "id": 12,
-                "title": "Todo 12",
-                "description": "Todo 12 description",
-                "status": false
-            },
-            {
-                "id": 13,
-                "title": "Todo 13",
-                "description": "Todo 13 description",
-                "status": false
-            },
-            {
-                "id": 14,
-                "title": "Todo 14",
-                "description": "Todo 14 description",
-                "status": false
-            },
-            {
-                "id": 15,
-                "title": "Todo 15",
-                "description": "Todo 15 description",
-                "status": false
-            }
-        ]
-    },
-    {
-        "user": {
-            "name": "fame2",
-            "password": "1234"
-        },
-        "todolist": [
-            {
-                "id": 1,
-                "title": "Todo 1",
-                "description": "Todo 1 description",
-                "status": false
-            },
-            {
-                "id": 2,
-                "title": "Todo 2",
-                "description": "Todo 2 description",
-                "status": false
-            },
-            {
-                "id": 3,
-                "title": "Todo 3",
-                "description": "Todo 3 description",
-                "status": false
-            },
-            {
-                "id": 4,
-                "title": "Todo 4",
-                "description": "Todo 4 description",
-                "status": false
-            },
-            {
-                "id": 5,
-                "title": "Todo 5",
-                "description": "Todo 5 description",
-                "status": false
-            },
-            {
-                "id": 6,
-                "title": "Todo 6",
-                "description": "Todo 6 description",
-                "status": false
-            },
-            {
-                "id": 7,
-                "title": "Todo 7",
-                "description": "Todo 7 description",
-                "status": false
-            },
-            {
-                "id": 8,
-                "title": "Todo 8",
-                "description": "Todo 8 description",
-                "status": false
-            },
-            {
-                "id": 9,
-                "title": "Todo 9",
-                "description": "Todo 9 description",
-                "status": false
-            },
-            {
-                "id": 10,
-                "title": "Todo 10",
-                "description": "Todo 10 description",
-                "status": false
-            },
-            {
-                "id": 11,
-                "title": "Todo 11",
-                "description": "Todo 11 description",
-                "status": false
-            },
-            {
-                "id": 12,
-                "title": "Todo 12",
-                "description": "Todo 12 description",
-                "status": false
-            },
-            {
-                "id": 13,
-                "title": "Todo 13",
-                "description": "Todo 13 description",
-                "status": false
-            },
-            {
-                "id": 14,
-                "title": "Todo 14",
-                "description": "Todo 14 description",
-                "status": false
-            },
-            {
-                "id": 15,
-                "title": "Todo 15",
-                "description": "Todo 15 description",
-                "status": false
-            }
-        ]
-    }
+  {
+    "name": "Fame",
+    "password": "1234",
+    "todolist": [
+      {
+        "id": 1,
+        "title": "Todo 1",
+        "description": "Todo 1 description",
+        "status": "not done"
+      },
+      {
+        "id": 2,
+        "title": "Todo 2",
+        "description": "Todo 2 description",
+        "status": "done"
+      },
+      {
+        "id": 3,
+        "title": "Todo 3",
+        "description": "Todo 3 description",
+        "status": "done"
+      },
+      {
+        "id": 4,
+        "title": "Todo 4",
+        "description": "Todo 4 description",
+        "status": "not done"
+      },
+      {
+        "id": 5,
+        "title": "Todo 5",
+        "description": "Todo 5 description",
+        "status": "not done"
+      },
+      {
+        "id": 6,
+        "title": "Todo 6",
+        "description": "Todo 6 description",
+        "status": "done"
+      },
+      {
+        "id": 16,
+        "title": "New Task",
+        "description": "Test Task from box",
+        "status": "done"
+      }
+    ]
+  },
+  {
+    "name": "Game",
+    "password": "1234",
+    "todolist": []
+  },
+  {
+    "name": "Tong",
+    "password": "LoveYou",
+    "todolist": [
+      {
+        "id": 1,
+        "title": "So Cute",
+        "description": "",
+        "status": "done"
+      }
+    ]
+  }
 ]

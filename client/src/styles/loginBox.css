@@ -1,0 +1,19 @@
+.container-login {
+    width: 35%;
+    min-width: 170px;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 4px solid #ccc;
+    border-radius: 24px;
+    background-color: #efefef;
+    padding: 1em;
+}
+
+#username-box, #password-box, #show-password, #button-box {
+    display: flex;
+    gap: 0.4em;
+    flex-wrap: wrap;
+    justify-content: left;
+}
