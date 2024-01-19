@@ -1,7 +1,7 @@
 const { User } = require('../models/user.js')
-const { Todo } = require('../models/todo.js')
+const { Setting } = require('../models/setting.js')
 const fs = require('fs')
-const filePath = './data/dataTodo.json'
+const filePath = './data/dataSetting.json'
 
 function management() {
     let listUsers = []
@@ -9,7 +9,8 @@ function management() {
     function addUser(name, password) {
         const userExist = listUsers.find((user) => user.getName() === name)
         if (userExist) return null
-        const user = new User(name, password)
+        const setting = new Setting()
+        const user = new User(name, password, setting)
         listUsers.push(user)
 
         const saveNewUser = JSON.stringify(listUsers, null, 2)
@@ -32,75 +33,40 @@ function management() {
         listUsers = JSON.parse(fs.readFileSync(filePath, 'utf8'))
         if (!listUsers) return
         listUsers = listUsers.map(
-            (user) =>
+            ({name, password, setting}) =>
                 new User(
-                    user.name,
-                    user.password,
-                    user.todolist.map(
-                        (todo) =>
-                            new Todo(
-                                todo.id,
-                                todo.title,
-                                todo.description,
-                                todo.status
-                            )
-                    )
+                    name,
+                    password,
+                    new Setting(setting.bgColor, setting.fontColor)
                 )
         )
     }
 
-    function addTodo(name, title, description) {
+    function setSetting(name, bgColor, fontColor) {
         const user = findUserByName(name)
-        if (!user) return null
-        const todo = new Todo(
-            user.getNextTodoId(),
-            title,
-            description,
-            'not done'
-        )
-        user.getTodolist().push(todo)
+        if (!user) return
+        user.setting.setBgColor(bgColor)
+        user.setting.setFontColor(fontColor)
 
-        const saveNewTodo = JSON.stringify(listUsers, null, 2)
-        fs.writeFileSync(filePath, saveNewTodo, 'utf8')
-
-        return user
-    }
-
-    function removeTodoById(name, id) {
-        const user = findUserByName(name)
-        if (!user) return null
-        console.log(user)
-        user.removeTodo(id)
-
-        const saveNewTodo = JSON.stringify(listUsers, null, 2)
-        fs.writeFileSync(filePath, saveNewTodo, 'utf8')
-
-        return user
-    }
-
-    function setTodoToDone(name, id) {
-        const user = findUserByName(name)
-        if (!user) return null
-        user.setToDone(id)
-
-        const saveNewTodo = JSON.stringify(listUsers, null, 2)
-        fs.writeFileSync(filePath, saveNewTodo, 'utf8')
-
-        return user
+        const saveNewSetting = JSON.stringify(listUsers, null, 2)
+        fs.writeFileSync(filePath, saveNewSetting, 'utf8')
     }
 
     function getLists() {
         return listUsers
     }
 
+    function defaultSetting() {
+        return new Setting()
+    }
+
     return {
         addUser,
         findUser,
         loadData,
-        addTodo,
-        removeTodoById,
-        setTodoToDone,
-        getLists
+        setSetting,
+        getLists,
+        defaultSetting
     }
 }
 

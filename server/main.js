@@ -19,13 +19,12 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-    const user = { name: '', password: '', todoList: null }
+    const user = { name: '', password: '', setting: manager.defaultSetting() }
     res.send({ user })
 })
 
-app.get('/login', (req, res) => {
-    const { name } = req.query
-    const { password } = req.query
+app.post('/login', (req, res) => {
+    const { name, password } = req.body
 
     const user = manager.findUser(name, password)
     if (!user)
@@ -34,8 +33,7 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    const { name } = req.query
-    const { password } = req.query
+    const { name, password } = req.body
 
     const user = manager.addUser(name, password)
     if (!user)
@@ -43,28 +41,9 @@ app.post('/register', (req, res) => {
     else res.send({ user })
 })
 
-app.post('/addTodo', (req, res) => {
-    const { title, description } = req.body
-    const { name } = req.query
-    const user = manager.addTodo(
-        name,
-        title,
-        description
-    )
-    res.send({ user })
-})
-
-app.post('/removeTodo', (req, res) => {
-    const { name, id } = req.body
-    console.log(name, id)
-    const user = manager.removeTodoById(name, id)
-    res.send({ user })
-})
-
-app.post('/setToDone', (req, res) => {
-    const { name, id } = req.body
-    const user = manager.setTodoToDone(name, id)
-    res.send({ user })
+app.post('/save-setting', (req, res) => {
+    const { name, bgColor, fontColor } = req.body
+    manager.setSetting(name, bgColor, fontColor)
 })
 
 app.listen(port, () => {

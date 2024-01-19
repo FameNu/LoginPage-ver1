@@ -39,9 +39,14 @@ function LoginBox(params) {
 
     const onToSignIn = async () => {
         if (!checkValidInput()) return
+        const user = {
+            name: usernameInput,
+            password: passwordInput
+        }
         try {
-            const response = await axios.get(
-                `${url}login?name=${usernameInput}&password=${passwordInput}`
+            const response = await axios.post(
+                `${url}login`,
+                user
             )
             callData(response.data)
         } catch (error) {
@@ -51,9 +56,14 @@ function LoginBox(params) {
 
     const onToSignUp = async () => {
         if (!checkValidInput()) return
+        const user = {
+            name: usernameInput,
+            password: passwordInput
+        }
         try {
             const response = await axios.post(
-                `${url}register?name=${usernameInput}&password=${passwordInput}`
+                `${url}register`,
+                user
             )
             callData(response.data)
         } catch (error) {

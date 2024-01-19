@@ -8,6 +8,7 @@
 
 .container {
   border: 4px solid #ccc;
+  background-color: rgb(255, 255, 255, 0.75);
   border-radius: 32px;
   padding: 1.5em;
   display: flex;

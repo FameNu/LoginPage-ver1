@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Admin01",
+    "password": "1234",
+    "setting": {
+      "bgColor": "#87ea5d",
+      "fontColor": "#e62b1e"
+    }
+  },
+  {
+    "name": "Admin02",
+    "password": "1234",
+    "setting": {
+      "bgColor": "#00ff7b",
+      "fontColor": "#c81498"
+    }
+  },
+  {
+    "name": "Admin03",
+    "password": "1234",
+    "setting": {
+      "bgColor": "#00ff00",
+      "fontColor": "#e83030"
+    }
+  },
+  {
+    "name": "Admin04",
+    "password": "1234",
+    "setting": {
+      "bgColor": "#0000ff",
+      "fontColor": "#000000"
+    }
+  },
+  {
+    "name": "Admin05",
+    "password": "1234",
+    "setting": {
+      "bgColor": "#ff00ff",
+      "fontColor": "#00ff00"
+    }
+  },
+  {
+    "name": "Fame",
+    "password": "1234",
+    "setting": {
+      "bgColor": "#a670db",
+      "fontColor": "#f4de71"
+    }
+  }
+]
